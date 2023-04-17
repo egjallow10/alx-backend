@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ A class that serve data fro csv file"""
 
 import csv
