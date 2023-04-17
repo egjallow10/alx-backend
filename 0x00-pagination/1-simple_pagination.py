@@ -1,3 +1,5 @@
+""" A class that serve data fro csv file"""
+
 import csv
 import math
 from typing import List, Tuple
