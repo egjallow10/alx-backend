@@ -1,7 +1,6 @@
 import csv
 import math
-from typing import List
-from typing import Tuple
+from typing import List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple:
@@ -41,12 +40,13 @@ class Server:
             List[List]: _description_
         """
         page_list: list = []
+
+        assert isinstance(page, int) and isinstance(page_size, int)
+        assert page > 0 and page_size > 0
         try:
-            assert isinstance(page, int) and isinstance(page_size, int)
-            assert page > 0 and page_size > 0
-        except AssertionError:
-            raise
-        pageIndex: Tuple[int, int] = index_range(page, page_size)
-        start, end = pageIndex
-        page_list = self.dataset()[start:end]
-        return page_list
+            pageIndex: Tuple[int, int] = index_range(page, page_size)
+            start, end = pageIndex
+            page_list = self.dataset()[start:end]
+            return page_list
+        except IndexError:
+            return []
