@@ -33,7 +33,7 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """ get items in a page """
-        assert type(page) == int or type(page_size) == int
+        assert isinstance(page, int) or isinstance(page_size, int)
         assert page > 0 or page_size > 0
 
         start, end = self.index_range(page, page_size)
