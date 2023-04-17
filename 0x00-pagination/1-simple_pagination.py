@@ -3,11 +3,12 @@ import math
 from typing import List
 from typing import Tuple
 
+
 def index_range(page: int, page_size: int) -> Tuple:
-        """return a tuple"""
-        startInx = (page - 1) * page_size
-        endIdx = startInx + page_size
-        return (startInx, endIdx)
+    """return a tuple"""
+    startInx = (page - 1) * page_size
+    endIdx = startInx + page_size
+    return (startInx, endIdx)
 
 
 class Server:
@@ -28,9 +29,6 @@ class Server:
             self.__dataset = dataset[1:]
 
         return self.__dataset
-    
-    
-
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Returns paginated values
@@ -42,14 +40,13 @@ class Server:
         Returns:
             List[List]: _description_
         """
-        page_list : list = []
+        page_list: list = []
         try:
-            assert type(page) == int and type(page_size) == int
+            assert isinstance(page, int) and isinstance(page_size, int)
             assert page > 0 and page_size > 0
         except AssertionError:
             raise
-        pageIndex :Tuple[int, int] = index_range(page, page_size)
+        pageIndex: Tuple[int, int] = index_range(page, page_size)
         start, end = pageIndex
         page_list = self.dataset()[start:end]
         return page_list
-        
