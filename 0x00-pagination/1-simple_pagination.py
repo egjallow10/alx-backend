@@ -35,8 +35,8 @@ class Server:
         """Returns paginated values
         """
         page_list: list = []
-        assert isinstance(page, int) and isinstance(page_size, int)
-        assert page > 0 and page_size > 0
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
         try:
             pageIndex: Tuple[int, int] = self.index_range(page, page_size)
             start, end = pageIndex
