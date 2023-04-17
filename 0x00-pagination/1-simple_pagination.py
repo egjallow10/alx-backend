@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-""" A class that serve data fro csv file"""
+""" implemented a Server class to work with data """
 
 
 import csv
-import math
-from typing import List, Tuple
+from typing import List
 
 
 class Server:
@@ -15,7 +14,7 @@ class Server:
     def __init__(self):
         self.__dataset = None
 
-    def dataset(self) -> List[List]:
+    def get_dataset(self) -> List[List]:
         """Cached dataset
         """
         if self.__dataset is None:
@@ -23,24 +22,27 @@ class Server:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]
+
         return self.__dataset
 
-    def index_range(page: int, page_size: int) -> Tuple:
-        """return a tuple"""
-        startInx = (page - 1) * page_size
-        endIdx = startInx + page_size
-        return (startInx, endIdx)
+    def index_range(self, page: int, page_size: int) -> tuple:
+        """ Rerurns containing page """
+        startIndex = (page - 1) * page_size
+        endIndex = startIndex + page_size
+        return (startIndex, endIndex)
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Returns paginated values
-        """
-        page_list: list = []
-        assert type(page) is int and page > 0
-        assert type(page_size) is int and page_size > 0
-        try:
-            pageIndex: Tuple[int, int] = self.index_range(page, page_size)
-            start, end = pageIndex
-            page_list = self.dataset()[start:end]
-            return page_list
-        except IndexError:
-            return []
+        """ get items in a page """
+        assert type(page) == int or type(page_size) == int
+        assert page > 0 or page_size > 0
+
+        start, end = self.index_range(page, page_size)
+
+        data = self.get_dataset()
+
+        list_result = []
+
+        if start >= len(data):
+            return list_result
+
+        return data[start:end]
