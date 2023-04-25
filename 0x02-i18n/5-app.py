@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Mock 
+Mock
 """
 
 from flask import Flask, render_template, request, g
