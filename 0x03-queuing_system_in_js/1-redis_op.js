@@ -13,11 +13,11 @@ client.on('error', (err) =>
 // await client.set('key', 'value');
 // await client.disconnect();
 
-const setNewSchool = async (schoolName, value) => {
+const setNewSchool = (schoolName, value) => {
   client.set(schoolName, value, redis.print);
 };
 
-const displaySchoolValue = async (schoolName) => {
+const displaySchoolValue = (schoolName) => {
   client.get(`${schoolName}`, (err, result) => {
     if (err) {
       console.error(err);

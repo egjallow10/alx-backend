@@ -1,36 +1,16 @@
-const redis = require('redis')
-const client = redis.createClient()
-const publisher = redis.createClient()
-const subcriber = redis.createClient()
-const logMessage = 'holberton school channel'
+import redis from 'redis';
+const subscriber = redis.createClient();
+subscriber.subscribe('holberton school channel');
 
-
-publisher.on('connect',erro => console.log(`Redis client connected to the server`))
-publisher.on('error',erro => console.log(`Redis client not connected to the server: ${erro}`))
-
-// publisher.publish(channel, channel)
-// subcriber.subscribe(channel)
-
-// subcriber.on('message', (theChannel, message) => {
-//     if (message === 'KILL_SERVER') {
-//         subcriber.unsubscribe();
-//         subcriber.quit();
-//     }
-// })
-
-const publishMessage = (meaasge, time) => {
-    if(meaasge === 'KILL_SERVER'){
-        publisher.quit()
-    }
-    
-    setTimeout(() =>{
-        console.log(`About to send ${meaasge}`);
-        publisher.publish(logMessage, meaasge);
-
-
-    },time)
-}
-publishMessage("Holberton Student #1 starts course", 100);
-publishMessage("Holberton Student #2 starts course", 200);
-publishMessage("KILL_SERVER", 300);
-publishMessage("Holberton Student #3 starts course", 400);
+subscriber.on('connect', () => {
+  console.log('Redis subscriber connected');
+});
+subscriber.on('error', (err) => {
+  console.log(`Redis subscriber not connected to the server: ${err}`);
+});
+subscriber.on('message', (channel, message) => {
+  console.log(message);
+  if (message === 'Holberton Student #3 starts course');
+  process.exit(0);
+  // subscriber.unsubscribe(channel);
+});
