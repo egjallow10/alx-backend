@@ -1,21 +1,14 @@
 const kue = require('kue');
 
-const queue = kue.createQueue();
+const push_notification_code = kue.createQueue();
 
 const jobData = {
-  phoneNumber: '1321244',
-  message: 'Hello, world',
+  phoneNumber: '4153518780',
+  message: 'This is the code to verify your account',
 };
 
-// const job = queue.create('push_notification_code', jobData);
-// job.on('enqueue', (id, type) => {
-//   console.log('Notification job created: ${id}');
-// });
-
-var job = queue.create('push_notification_code', jobData).save(function (err) {
-  if (!err) console.log(`Notification job created: ${job.id}`);
-});
-
-// job.complete('complete', () => {
-//   console.log('Notification jobs complete');
-// });
+var job = push_notification_code
+  .create('push_notification_code', jobData)
+  .save(function (err) {
+    if (!err) console.log(`Notification job created: ${job.id}`);
+  });

@@ -11,7 +11,6 @@ publisher.on('error', (erro) =>
 
 const publishMessage = (message, time) => {
   setTimeout(() => {
-    //console.log(`About to send ${meaasge}`);
     publisher.publish(channel, message);
   }, time);
 };
